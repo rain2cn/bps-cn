@@ -8,10 +8,25 @@
 # 使用方法
 
 1. 下载本仓库 并覆盖 `BorderlandsPreSequel` 原游戏的三个文件夹
-2. 修改`BorderlandsPreSequel/WillowGame/Config/BaseEngine.ini`中的`[Engine.Engine]`
+2. 修改`BorderlandsPreSequel/WillowGame/Config/DefaultEngine.ini`中的`[Engine.Engine]`
 ```
 MediumFontName=chFont.Mid
 LargeFontName=chFont.Mid
 SubtitleFontName=chFont.Mid
 ```
 即可生效
+
+## Linux下覆盖文件提示
+先进入原游戏目录 将所有文件名转为小写。
+再进入本项目将所有文件名转为小写 并覆盖原文件
+参考脚本
+```
+find . -depth | while IFS= read -r item; do
+    dir=$(dirname "$item")
+    base=$(basename "$item")
+    lower_base=$(echo "$base" | tr '[:upper:]' '[:lower:]')
+    if [ "$base" != "$lower_base" ]; then
+        mv "$dir/$base" "$dir/$lower_base"
+    fi
+done
+```
